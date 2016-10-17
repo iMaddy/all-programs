@@ -13,8 +13,22 @@ public class Test
         list.add(1);
         list.add(2);
         list.add(3);
-        list.addAtBeginning(10);
-        list.addAtBeginning(20);
+        list.add(4);
+        list.add(5);
+        list.add(6);
+        list.addAtBeginning(0);
+        list.addAtBeginning(-1);
         list.print();
+////        System.out.println(list.find(2));
+//        //list.swap(32,13);
+//        list.swap(32,13);
+//        list.print();
+//        list.swap(13,32);
+//        list.swap(13,32);
+//        list.print();
+
+        list.reverse();
+        list.print();
+
     }
 }
