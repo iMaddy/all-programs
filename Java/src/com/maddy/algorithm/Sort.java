@@ -5,17 +5,6 @@ package com.maddy.algorithm;
  */
 public class Sort
 {
-    public static void main(String []args)
-    {
-        int[] array = {2, -4, 5, 6, 2, 11, 45, 83, 9823, -8, -33, 34, 54};
-//        quickSort(array);
-        insertionSort(array);
-        for(int item: array)
-        {
-            System.out.println(item);
-        }
-    }
-
     public static void quickSort(int[] array)
     {
         quickSort(array,0,array.length-1);
