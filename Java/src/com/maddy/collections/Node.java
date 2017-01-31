@@ -1,19 +1,19 @@
-package com.maddy.binarytree;
+package com.maddy.collections;
 
 /**
  * Created by madhukar.b on 07/08/16.
  */
 public class Node
 {
-    private int key;
-    private Node leftChild;
-    private Node rightChild;
+    public int key;
+    public Node left;
+    public Node right;
 
     Node(int key)
     {
         this.key = key;
-        this.rightChild = null;
-        this.leftChild = null;
+        this.right = null;
+        this.left = null;
     }
 
     public int getKey()
@@ -23,22 +23,22 @@ public class Node
 
     public Node leftChild()
     {
-        return leftChild;
+        return left;
     }
 
     public Node rightChild()
     {
-        return rightChild;
+        return right;
     }
 
     public void setLeftChild(Node node)
     {
-        leftChild = node;
+        left = node;
     }
 
     public void setRightChild(Node node)
     {
-        rightChild = node;
+        right = node;
     }
 
     @Override
