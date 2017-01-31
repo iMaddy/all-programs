@@ -3,10 +3,10 @@ package com.maddy.collections;
 /**
  * Created by madhukar.b on 16/10/16.
  */
-public class LinkedList
+public class MyLinkedList
 {
     private UniDirectionalNode head;
-    public LinkedList()
+    public MyLinkedList()
     {
         this.head = null;
     }

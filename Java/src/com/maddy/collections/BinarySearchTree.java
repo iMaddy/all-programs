@@ -1,5 +1,7 @@
 package com.maddy.collections;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 /**
@@ -10,7 +12,7 @@ class Height
     int height = 0;
 }
 
-public class BinaryTree
+public class BinarySearchTree
 {
     private Node root;
 
@@ -109,8 +111,30 @@ public class BinaryTree
         postOrderTraversalInternal(root);
     }
 
+    public void levelOrderTraversal() 
+    {
+    	Queue<Node> queue = new LinkedList<Node>();
+        queue.add(root);
+        while (!queue.isEmpty()) 
+        {
+            Node tempNode = queue.poll();
+            System.out.print(tempNode.key + " ");
+ 
+            /*Enqueue left child */
+            if (tempNode.left != null) {
+                queue.add(tempNode.left);
+            }
+ 
+            /*Enqueue right child */
+            if (tempNode.right != null) {
+                queue.add(tempNode.right);
+            }
+        }
+    }
+    
     /*
     @return: returns node with key if key is present, else returns null
+     * complexity: 
      */
     public Node find(int key)
     {
@@ -122,7 +146,7 @@ public class BinaryTree
      */
     public int height()
     {
-    	return BinaryTree.heightInternal(root);
+    	return BinarySearchTree.heightInternal(root);
     }
     
     private static int heightInternal(Node lRoot)
@@ -131,7 +155,7 @@ public class BinaryTree
     		return 0;
     	else
     		return 1 + 
-    				Math.max(BinaryTree.heightInternal(lRoot.left), BinaryTree.heightInternal(lRoot.right));
+    				Math.max(BinarySearchTree.heightInternal(lRoot.left), BinarySearchTree.heightInternal(lRoot.right));
     }
     
     /* print tree
@@ -228,7 +252,7 @@ public class BinaryTree
 	 */
 	public void printTreeRotated()
 	{
-		BinaryTree.printTreeRotatedInternal(root, 1);
+		BinarySearchTree.printTreeRotatedInternal(root, 1);
 	}
 	
 	private static void printTreeRotatedInternal(Node root, int level)
@@ -278,4 +302,27 @@ public class BinaryTree
 		return l&&r;
 	}
 
+	public int diameter()
+	{
+		return diameterInternal(root, new Height());
+	}
+
+	private int diameterInternal(Node root, Height h)
+	{
+		if(root == null)
+		{
+			h.height = 0;
+			return 0; // diameter is zero for null node
+		}
+		
+		Height lh = new Height();
+		Height rh = new Height();
+		
+		int ld = diameterInternal(root.left, lh);
+		int rd = diameterInternal(root.right, rh);
+		
+		h.height = Math.max(lh.height, rh.height) + 1;
+		
+		return Math.max(lh.height+rh.height+1, Math.max(ld, rd));
+	}
 }
