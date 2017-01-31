@@ -59,5 +59,17 @@ public class TestClass
         BinarySearchTree constructedTree = BinarySearchTree.constructTreeFromInOrderAndPostOrder(inOrder,postOrder);
         if(constructedTree != null)
             constructedTree.printTreeRotated();
+
+
+        bTree.printAncestors(3);
+        System.out.println();
+        bTree.printAncestors(5);
+        System.out.println();
+        bTree.printAncestors(6);
+        System.out.println();
+        bTree.printAncestors(4);
+        System.out.println();
+        bTree.printAncestors(-1);
+        System.out.println();
     }
 }

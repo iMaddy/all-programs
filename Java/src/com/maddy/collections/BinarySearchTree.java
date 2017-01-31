@@ -401,19 +401,25 @@ public class BinarySearchTree
         return tNode;
     }
 
-    /*
-    IN - 123456
-    PR - 421365
-    PO - 132564
+    public void printAncestors(int key)
+    {
+        printAncestorsInternal(root, key);
+    }
 
-         4
-       /   \
-     /      \
-    2         6
-   / \        /
- /    \     /
-1      3  5
+    private boolean printAncestorsInternal(Node root, int key)
+    {
+        if(root == null)
+            return false;
 
+        if(root.key == key)
+            return true;
 
-     */
+        if(printAncestorsInternal(root.left, key) || printAncestorsInternal(root.right, key))
+        {
+            System.out.print(root.key + " ");
+            return true;
+        }
+
+        return false;
+    }
 }
