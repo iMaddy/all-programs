@@ -50,7 +50,7 @@ public class BinarySearchTree
     {
         if (null == root)
         {
-            return root;
+            return null;
         }
 
         if (key == root.getKey())
@@ -113,7 +113,7 @@ public class BinarySearchTree
 
     public void levelOrderTraversal() 
     {
-    	Queue<Node> queue = new LinkedList<Node>();
+    	Queue<Node> queue = new LinkedList<>();
         queue.add(root);
         while (!queue.isEmpty()) 
         {
@@ -131,7 +131,44 @@ public class BinarySearchTree
             }
         }
     }
-    
+
+    /*
+     * Inorder traversal without using extra memory or function stack using function stack
+     * complexity - time O(n), space - O(1)
+     */
+    public void morrisTraversal()
+	{
+		Node current = root;
+		while(current != null)
+		{
+			if(current.left == null)
+			{
+				System.out.print(current.key + " ");
+				current = current.right;
+			}
+			else
+			{
+				Node pre = current.left;
+
+				while(pre.right != null && pre.right != current /* this condition where thread pointing to preorder successor*/)
+				{
+					pre = pre.right;
+				}
+
+				if(pre.right == null) //use this unused thread to point preorder successor
+                {
+                    pre.right = current;
+                    current = current.left;
+                }
+                else // this is condition where we reached preorder sucessor of 'pre' i.e. pre.right != current
+                {
+                    pre.right = null; //revert the links to restore tree to thread free structure
+                    System.out.print(current.key + " ");
+                    current = current.right;
+                }
+			}
+		}
+	}
     /*
     @return: returns node with key if key is present, else returns null
      * complexity: 

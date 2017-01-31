@@ -27,14 +27,14 @@ public class TestClass
         bTree.addNode(15);
         bTree.addNode(16);
 
-        bTree.inOrderTraversal();
-        
         System.out.println(bTree.height()+"\n");
         
         bTree.printTreeRotated();
         
         System.out.println(bTree.diameter());
-        
-        
+
+        System.out.printf("");
+
+        bTree.morrisTraversal();
     }
 }
