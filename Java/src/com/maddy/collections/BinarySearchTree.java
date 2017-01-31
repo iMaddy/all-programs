@@ -1,5 +1,9 @@
 package com.maddy.collections;
 
+import com.maddy.util.UtilBox;
+import com.maddy.util.WrapInt;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
@@ -16,13 +20,23 @@ public class BinarySearchTree
 {
     private Node root;
 
+    public BinarySearchTree(Node root)
+    {
+        this.root = root;
+    }
+
+    public BinarySearchTree()
+    {
+        this.root = null;
+    }
+
     private static void inOrderTraversalInternal(Node root)
     {
         if (null == root)
             return;
 
         inOrderTraversalInternal(root.leftChild());
-        System.out.println(root);
+        System.out.print(root + " ");
         inOrderTraversalInternal(root.rightChild());
     }
 
@@ -31,7 +45,7 @@ public class BinarySearchTree
         if (null == root)
             return;
 
-        System.out.println(root);
+        System.out.print(root + " ");
         preOrderTraversalInternal(root.leftChild());
         preOrderTraversalInternal(root.rightChild());
     }
@@ -43,7 +57,7 @@ public class BinarySearchTree
 
         postOrderTraversalInternal(root.leftChild());
         postOrderTraversalInternal(root.rightChild());
-        System.out.println(root);
+        System.out.print(root + " ");
     }
 
     private static Node findInternal(int key, Node root)
@@ -362,4 +376,44 @@ public class BinarySearchTree
 		
 		return Math.max(lh.height+rh.height+1, Math.max(ld, rd));
 	}
+
+	public static BinarySearchTree constructTreeFromInOrderAndPostOrder(ArrayList<Integer> inOrder, ArrayList<Integer> postOrder)
+    {
+        Node tNode = constructTreeFromInOrderAndPostOrderInternal(inOrder, postOrder, new WrapInt(postOrder.size()-1), 0, inOrder.size()-1);
+        return new BinarySearchTree(tNode);
+    }
+
+    private static Node constructTreeFromInOrderAndPostOrderInternal(ArrayList<Integer> inOrder, ArrayList<Integer> postOrder, WrapInt postIndex, int inStart, int inEnd)
+    {
+        if(inStart > inEnd)
+            return null;
+
+        Node tNode = new Node((int) postOrder.get(postIndex.getValueAndDecreament()));
+
+        if(inStart == inEnd)
+            return tNode;
+
+        int indexInOrder = UtilBox.find(inOrder,tNode.key);
+
+        tNode.right = constructTreeFromInOrderAndPostOrderInternal(inOrder, postOrder, postIndex, indexInOrder + 1, inEnd);
+        tNode.left = constructTreeFromInOrderAndPostOrderInternal(inOrder, postOrder, postIndex, inStart, indexInOrder - 1);
+
+        return tNode;
+    }
+
+    /*
+    IN - 123456
+    PR - 421365
+    PO - 132564
+
+         4
+       /   \
+     /      \
+    2         6
+   / \        /
+ /    \     /
+1      3  5
+
+
+     */
 }
