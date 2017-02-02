@@ -110,6 +110,66 @@ public class BinarySearchTree
         }
     }
 
+    /*
+     *  comlexity:
+     *  time: O(h) - height of the tree, for balanced tree is less than O(log n)
+     *               for skewed tree it is O(n) - worst case
+     */
+    public void delete(int key)
+    {
+        root = deleteInternal(root, key);
+    }
+
+    private Node deleteInternal(Node root, int key)
+    {
+        if(root == null)
+            return null;
+
+        if(key < root.key)
+        {
+            root.left = deleteInternal(root.left, key);
+        }
+        else if(key > root.key)
+        {
+            root.right = deleteInternal(root.right, key);
+        }
+        else //matched key
+        {
+            if(root.left == null)
+            {
+                return root.right;
+            }
+            else if(root.right == null)
+            {
+                return root.left;
+            }
+
+            // replace value with min value in right sub tree (i.e. inorder successor)
+            root.key = minValue(root.right);
+
+            // delete inorder successor
+            root.right = deleteInternal(root.right, root.key);
+        }
+
+        return root;
+    }
+
+    private int minValue(Node root)
+    {
+        if(root == null)
+            return Integer.MIN_VALUE;
+
+        int minVal = root.key;
+
+        while(root.left != null)
+        {
+            minVal = root.left.key;
+            root = root.left;
+        }
+
+        return minVal;
+    }
+
     public void inOrderTraversal()
     {
         inOrderTraversalInternal(root);
