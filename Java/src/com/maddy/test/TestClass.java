@@ -63,8 +63,15 @@ public class TestClass
 //        bTree.printAncestors(-1);
 //        System.out.println();
 
-        bTree.delete(10);
-        System.out.println();
-        bTree.printTreeRotated();
+//        bTree.delete(10);
+//        System.out.println();
+//        bTree.printTreeRotated();
+
+//        bTree.root.right.right = new Node(10);
+//        bTree.root.right.right.left = new Node(3);
+//        bTree.root.right.right.right = new Node(11);
+//        System.out.println("\n");
+//        bTree.printTreeRotated();
+//        System.out.println(bTree.isBST());
     }
 }

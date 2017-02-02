@@ -482,4 +482,30 @@ public class BinarySearchTree
 
         return false;
     }
+
+    /*
+     * complexity: O(n)
+     */
+    public boolean isBST()
+    {
+        Node prev = null;
+        return isBSTInternal(root, prev);
+    }
+
+    private static boolean isBSTInternal(Node root, Node prev)
+    {
+        if(root == null)
+            return true;
+
+        if(!isBSTInternal(root.left,prev))
+            return false;
+
+        if(prev != null && prev.key > root.key)
+            return false;
+        prev = root;
+
+        return isBSTInternal(root.right,prev);
+
+    }
 }
+
