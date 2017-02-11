@@ -207,7 +207,7 @@ public class BinarySearchTree
     }
 
     /*
-     * Inorder traversal without using extra memory or function stack using function stack
+     * Inorder traversal without using extra memory or function stack
      * complexity - time O(n), space - O(1)
      */
     public void morrisTraversal()
@@ -222,19 +222,20 @@ public class BinarySearchTree
 			}
 			else
 			{
+			    /* Find the inorder predecessor of current */
 				Node pre = current.left;
 
-				while(pre.right != null && pre.right != current /* this condition where thread pointing to preorder successor*/)
+				while(pre.right != null && pre.right != current /* this condition where thread pointing to inorder predecessor*/)
 				{
 					pre = pre.right;
 				}
 
-				if(pre.right == null) //use this unused thread to point preorder successor
+				if(pre.right == null) //use this unused thread to point inorder predecessor
                 {
                     pre.right = current;
                     current = current.left;
                 }
-                else // this is condition where we reached preorder sucessor of 'pre' i.e. pre.right != current
+                else // this is condition where we reached inorder predecessor of 'pre' i.e. pre.right != current
                 {
                     pre.right = null; //revert the links to restore tree to thread free structure
                     System.out.print(current.key + " ");
@@ -507,5 +508,6 @@ public class BinarySearchTree
         return isBSTInternal(root.right,prev);
 
     }
+
 }
 

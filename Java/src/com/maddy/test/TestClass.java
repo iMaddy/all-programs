@@ -1,6 +1,7 @@
 package com.maddy.test;
 
 import com.maddy.collections.BinarySearchTree;
+import com.maddy.collections.BinaryTree;
 
 import java.util.ArrayList;
 
@@ -73,5 +74,11 @@ public class TestClass
 //        System.out.println("\n");
 //        bTree.printTreeRotated();
 //        System.out.println(bTree.isBST());
+
+
+        BinaryTree tree = new BinaryTree();
+
+        /*
+         */
     }
 }
