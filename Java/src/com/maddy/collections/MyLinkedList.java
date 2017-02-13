@@ -73,6 +73,22 @@ public class MyLinkedList
         return findInternal(head.next, data, index);
     }
 
+    public UniDirectionalNode findNode(int data)
+    {
+        return findNodeInternal(head,data,0);
+    }
+
+    private UniDirectionalNode findNodeInternal(UniDirectionalNode head, int data, int index)
+    {
+        if(head == null)
+            return null;
+
+        if(head.data == data)
+            return head;
+
+        return findNodeInternal(head.next, data, index);
+    }
+
     /**
      * Function to swap node of linked list
      * @param x element to be swapped
@@ -157,5 +173,57 @@ public class MyLinkedList
         }
 
         head = prev;
+    }
+
+    public static UniDirectionalNode mergePoint(MyLinkedList l1, MyLinkedList l2)
+    {
+        UniDirectionalNode mergePoint = null, longer = null, shorter = null;
+        int length1 = l1.size();
+        int length2 = l2.size();
+
+        if(length1 > length2)
+        {
+            longer = l1.head;
+            shorter = l2.head;
+        }
+        else
+        {
+            longer = l2.head;
+            shorter = l1.head;
+        }
+
+        int diff = Math.abs(length1-length2);
+
+        while(diff-- > 0)
+        {
+            longer = longer.next;
+        }
+
+        while(longer != null && shorter != null)
+        {
+            if(longer == shorter)
+            {
+                mergePoint = longer;
+                break;
+            }
+
+            longer = longer.next;
+            shorter = shorter.next;
+        }
+
+        return mergePoint;
+    }
+
+    public int size()
+    {
+        return sizeInternal(head);
+    }
+
+    private int sizeInternal(UniDirectionalNode head)
+    {
+        if(head == null)
+            return 0;
+
+        return 1 + sizeInternal(head.next);
     }
 }
