@@ -5,7 +5,7 @@ package com.maddy.collections;
  */
 public class MyLinkedList
 {
-    private UniDirectionalNode head;
+    private UnidirectionalNode head;
     public MyLinkedList()
     {
         this.head = null;
@@ -19,29 +19,29 @@ public class MyLinkedList
     {
         if(head == null)
         {
-            head = new UniDirectionalNode(data);
+            head = new UnidirectionalNode(data);
             return;
         }
 
-        UniDirectionalNode temp = head;
+        UnidirectionalNode temp = head;
         while(temp.next != null)
         {
             temp = temp.next;
         }
 
-        temp.next = new UniDirectionalNode(data);
+        temp.next = new UnidirectionalNode(data);
     }
 
     public void addAtBeginning(int data)
     {
-        UniDirectionalNode temp = new UniDirectionalNode(data);
+        UnidirectionalNode temp = new UnidirectionalNode(data);
         temp.next = head;
         head = temp;
     }
 
     public void print()
     {
-        UniDirectionalNode temp = head;
+        UnidirectionalNode temp = head;
         while(temp != null)
         {
             System.out.print(temp.data + " ");
@@ -61,7 +61,7 @@ public class MyLinkedList
         return findInternal(head,data,0);
     }
 
-    private int findInternal(UniDirectionalNode head, int data, int index)
+    private int findInternal(UnidirectionalNode head, int data, int index)
     {
         if(head == null)
             return -1;
@@ -73,12 +73,12 @@ public class MyLinkedList
         return findInternal(head.next, data, index);
     }
 
-    public UniDirectionalNode findNode(int data)
+    public UnidirectionalNode findNode(int data)
     {
         return findNodeInternal(head,data,0);
     }
 
-    private UniDirectionalNode findNodeInternal(UniDirectionalNode head, int data, int index)
+    private UnidirectionalNode findNodeInternal(UnidirectionalNode head, int data, int index)
     {
         if(head == null)
             return null;
@@ -99,11 +99,11 @@ public class MyLinkedList
         if(head == null || x==y)
             return;
 
-        UniDirectionalNode prevX = null;
-        UniDirectionalNode _x = null;
-        UniDirectionalNode prevY = null;
-        UniDirectionalNode _y = null;
-        UniDirectionalNode temp = head;
+        UnidirectionalNode prevX = null;
+        UnidirectionalNode _x = null;
+        UnidirectionalNode prevY = null;
+        UnidirectionalNode _y = null;
+        UnidirectionalNode temp = head;
 
         if(head.data == x)
             _x = head;
@@ -154,19 +154,19 @@ public class MyLinkedList
             prevY.next = _x;
         }
 
-        UniDirectionalNode temp1 = _x.next;
+        UnidirectionalNode temp1 = _x.next;
         _x.next = _y.next;
         _y.next = temp1;
     }
 
     public void reverse()
     {
-        UniDirectionalNode current = head;
-        UniDirectionalNode prev = null;
+        UnidirectionalNode current = head;
+        UnidirectionalNode prev = null;
 
         while(current != null)
         {
-            UniDirectionalNode next = current.next;
+            UnidirectionalNode next = current.next;
             current.next = prev;
             prev = current;
             current = next;
@@ -175,9 +175,9 @@ public class MyLinkedList
         head = prev;
     }
 
-    public static UniDirectionalNode mergePoint(MyLinkedList l1, MyLinkedList l2)
+    public static UnidirectionalNode mergePoint(MyLinkedList l1, MyLinkedList l2)
     {
-        UniDirectionalNode mergePoint = null, longer = null, shorter = null;
+        UnidirectionalNode mergePoint = null, longer = null, shorter = null;
         int length1 = l1.size();
         int length2 = l2.size();
 
@@ -219,7 +219,7 @@ public class MyLinkedList
         return sizeInternal(head);
     }
 
-    private int sizeInternal(UniDirectionalNode head)
+    private int sizeInternal(UnidirectionalNode head)
     {
         if(head == null)
             return 0;

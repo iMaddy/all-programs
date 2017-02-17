@@ -1,9 +1,9 @@
 package com.maddy.test;
 
-import com.maddy.collections.BinarySearchTree;
-import com.maddy.collections.BinaryTree;
-
-import java.util.ArrayList;
+import com.maddy.collections.graph.*;
+import com.maddy.collections.graph.factory.*;
+import com.maddy.collections.tree.BinarySearchTree;
+import com.maddy.collections.tree.BinaryTree;
 
 /**
  * Created by madhukar.b on 07/08/16.
@@ -12,7 +12,26 @@ public class TestClass
 {
     public static void main(String[] args)
     {
-        BinarySearchTreeTest();
+        //BinarySearchTreeTest();
+        GraphTest();
+    }
+
+    private static void GraphTest()
+    {
+        AbstractGraphFactory graphFactory =
+                new AdjMatrixDirectedGraphFactory();
+
+        Graph graph = graphFactory.createGraph(5);
+        graph.addEdge(0, 1);
+        graph.addEdge(0, 4);
+        graph.addEdge(1, 2);
+        graph.addEdge(1, 3);
+        graph.addEdge(1, 4);
+        graph.addEdge(2, 3);
+        graph.addEdge(3, 4);
+
+        // print the adjacency list representation of the above graph
+        graph.printGraph();
     }
 
     private static void BinarySearchTreeTest()

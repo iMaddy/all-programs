@@ -1,4 +1,6 @@
-package com.maddy.collections;
+package com.maddy.collections.tree;
+
+import com.maddy.collections.Node;
 
 /**
  * Created by gitanjali on 05/02/17.

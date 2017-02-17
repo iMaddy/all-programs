@@ -1,5 +1,6 @@
-package com.maddy.collections;
+package com.maddy.collections.tree;
 
+import com.maddy.collections.Node;
 import com.maddy.util.UtilBox;
 import com.maddy.util.WrapInt;
 
