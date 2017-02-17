@@ -19,7 +19,7 @@ public class TestClass
     private static void GraphTest()
     {
         AbstractGraphFactory graphFactory =
-                new AdjMatrixDirectedGraphFactory();
+                new AdjListDirectedGraphFactory();
 
         Graph graph = graphFactory.createGraph(5);
         graph.addEdge(0, 1);
@@ -29,9 +29,12 @@ public class TestClass
         graph.addEdge(1, 4);
         graph.addEdge(2, 3);
         graph.addEdge(3, 4);
+        graph.addEdge(3, 0);
 
         // print the adjacency list representation of the above graph
         graph.printGraph();
+        graph.BSF(0);
+        graph.DSF(3);
     }
 
     private static void BinarySearchTreeTest()

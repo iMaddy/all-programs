@@ -38,6 +38,18 @@ public class AdjMatrixDirectedGraph extends DirectedGraph
     }
 
     @Override
+    public void BSF(int source)
+    {
+
+    }
+
+    @Override
+    public void DSF(int source)
+    {
+
+    }
+
+    @Override
     public void addEdgeInternal(int src, int dest)
     {
         adj[src][dest] = 1;

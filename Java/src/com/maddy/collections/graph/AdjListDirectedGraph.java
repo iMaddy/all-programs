@@ -1,6 +1,8 @@
 package com.maddy.collections.graph;
 
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * Created by gitanjali on 16/02/17.
@@ -66,6 +68,57 @@ public class AdjListDirectedGraph extends DirectedGraph
                 System.out.print("[" + item.getVertex() + "," + item.getWeight() + "] ");
             }
             System.out.println();
+        }
+    }
+
+    @Override
+    public void BSF(int source)
+    {
+        boolean[] visited = new boolean[V];
+        Queue<Integer> queue = new LinkedList<>();
+        visited[source] = true;
+        queue.add(source);
+        while (!queue.isEmpty())
+        {
+            int vertex = queue.poll();
+            System.out.print( vertex + " ");
+
+            //get all adjacent vertexes
+            Iterator<AdjNode> iterator = adjList[vertex].listIterator();
+
+            while (iterator.hasNext())
+            {
+                AdjNode node = iterator.next();
+                if(!visited[node.getVertex()])
+                {
+                    queue.add(node.getVertex());
+                    visited[node.getVertex()] = true;
+                }
+            }
+        }
+        System.out.println();
+    }
+
+    @Override
+    public void DSF(int source)
+    {
+        if(source > getMaxVertexValue())
+            return;
+        boolean[] visited = new boolean[V];
+        DSFIneternal(source, visited);
+        System.out.println();
+    }
+
+    private void DSFIneternal(int v, boolean[] visited)
+    {
+        visited[v] = true;
+        System.out.print(v + " ");
+        Iterator<AdjNode> iterator = adjList[v].listIterator();
+        while (iterator.hasNext())
+        {
+            AdjNode node = iterator.next();
+            if(!visited[node.getVertex()])
+                DSFIneternal(node.getVertex(), visited);
         }
     }
 }

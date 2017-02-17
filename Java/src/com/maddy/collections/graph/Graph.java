@@ -8,4 +8,6 @@ public interface Graph
     public void addEdge(int src, int dest);
     public void addEdge(int src, int dest, int weight);
     public void printGraph();
+    public void BSF(int source);
+    public void DSF(int source);
 }

@@ -70,4 +70,16 @@ public class AdjListUndirectedGraph extends UndirectedGraph
             System.out.println();
         }
     }
+
+    @Override
+    public void BSF(int source)
+    {
+
+    }
+
+    @Override
+    public void DSF(int source)
+    {
+
+    }
 }
