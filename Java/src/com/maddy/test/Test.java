@@ -11,10 +11,10 @@ public class Test
 {
     public static void main(String[] args)
     {
-        int[] array = new int[]{-112, 1, 2, 3, 5};
+        int[] array = new int[]{12222, 12, 21, 334, 736635, 1, 212, 1221, 13456};
         try
         {
-            Sort.countingSort(array, 100);
+            Sort.radixSort(array);
         } catch (InvalidInputException e)
         {
             e.printStackTrace();

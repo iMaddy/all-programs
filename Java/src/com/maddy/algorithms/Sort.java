@@ -1,6 +1,7 @@
 package com.maddy.algorithms;
 
 import com.maddy.exceptions.InvalidInputException;
+import com.maddy.util.UtilBox;
 
 /**
  * Created by madhukar.b on 24/12/16.
@@ -74,7 +75,7 @@ public class Sort
             count[item]++;
         }
 
-        //place the element at position by refering element count
+        //place the element at position by referring element count
         int k = 0;
         for(int i=0; i<=range; i++)
         {
@@ -86,5 +87,56 @@ public class Sort
                 }
             }
         }
+    }
+
+    private static void countSortWithRadix(int[] array, int exp) throws InvalidInputException
+    {
+        int[] count = new int[10];
+
+        //count occurrences and save in hash with index as element value
+
+        for (int item: array)
+        {
+            if(item < 0)
+                throw new InvalidInputException("Error: Invalid input: " + item);
+            int digit = getDigit(item,exp);
+            count[digit]++;
+        }
+
+        //cumulative sum
+        for(int i=1; i<10; i++)
+        {
+            count[i] += count[i-1];
+        }
+
+        int temp[] = new int[array.length];
+
+        for(int i=array.length-1; i>=0; i--)
+        {
+            int digit = getDigit(array[i], exp);
+            temp[count[digit]-1] = array[i];
+            count[digit]--;
+        }
+
+        for(int i=0; i<array.length; i++)
+        {
+            array[i] = temp[i];
+        }
+    }
+
+    private static int getDigit(int item, int exp)
+    {
+        return (item/exp)%10;
+    }
+    public static void radixSort(int[] array) throws InvalidInputException
+    {
+        if(array.length<1)
+            return;
+
+        int max = UtilBox.getMax(array);
+
+        for(int exp =1; (max/exp) >0; exp *= 10)
+            countSortWithRadix(array,exp);
+
     }
 }
