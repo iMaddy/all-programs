@@ -1,4 +1,4 @@
-package com.maddy.algorithm;
+package com.maddy.algorithms;
 
 public class LongestIncreasingSubsequence
 {

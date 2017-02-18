@@ -1,6 +1,4 @@
-package com.maddy.algorithm;
-
-import java.util.ArrayList;
+package com.maddy.algorithms;
 
 /**
  * Created by gitanjali on 13/02/17.
@@ -9,6 +7,8 @@ public class ArraySubsetSumNonNegative
 {
     public static boolean isSubsetWithSumPresent(int input[], int sum)
     {
+        if(input.length < 1)
+            return false;
         // logic: n - length of input
         // subset(input, n, sum) => subset(input, n-1, sum) OR subset(input, n-1, sum - input[n])
 

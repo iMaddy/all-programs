@@ -25,7 +25,7 @@ public class UtilBox
         return -1;
     }
 
-    public static int[] arrayListToArray()
+    public static int[] userInputArray()
     {
         Scanner sc = new Scanner(System.in);
         int in;
@@ -45,5 +45,13 @@ public class UtilBox
         }
 
         return a;
+    }
+
+    public static void printArray(int[] array)
+    {
+        for(int item: array)
+            System.out.print(item + " ");
+
+        System.out.println();
     }
 }

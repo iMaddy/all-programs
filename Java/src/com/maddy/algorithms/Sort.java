@@ -1,4 +1,6 @@
-package com.maddy.algorithm;
+package com.maddy.algorithms;
+
+import com.maddy.exceptions.InvalidInputException;
 
 /**
  * Created by madhukar.b on 24/12/16.
@@ -58,4 +60,31 @@ public class Sort
         }
     }
 
+    public static void countingSort(int[] array, int range) throws InvalidInputException
+    {
+        int[] count = new int[range+1];
+
+        //count occurrences and save in hash with index as element value
+
+        for (int item: array)
+        {
+            if(item>range || item < 0)
+                throw new InvalidInputException("Error: Invalid input: " + item);
+
+            count[item]++;
+        }
+
+        //place the element at position by refering element count
+        int k = 0;
+        for(int i=0; i<=range; i++)
+        {
+            if(count[i] != 0)
+            {
+                while(count[i]-- > 0)
+                {
+                    array[k++] = i;
+                }
+            }
+        }
+    }
 }

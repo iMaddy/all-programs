@@ -1,4 +1,4 @@
-package com.maddy.algorithm;
+package com.maddy.algorithms;
 
 public class LongestCommonSubsequence
 {
@@ -11,7 +11,7 @@ public class LongestCommonSubsequence
 	
 	/*
 	 * recursive approach
-	 * complexity of algorithm: time: O(2^n)
+	 * complexity of algorithms: time: O(2^n)
 	 */
 	private static int lcsInternalRecursive(String str1, String str2, int len1, int len2)
 	{

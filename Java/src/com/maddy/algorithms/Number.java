@@ -1,4 +1,4 @@
-package com.maddy.algorithm;
+package com.maddy.algorithms;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +21,7 @@ public class Number {
 	}
 	
 	/*
-	 *  complexity of algorithm: O(n*log log n)
+	 *  complexity of algorithms: O(n*log log n)
 	 */
 	public static List<Integer> primeNumberUpto(int n)
 	{
@@ -55,7 +55,7 @@ public class Number {
 	}
 
 	/*
-	 * complexity of algorithm: log(b)
+	 * complexity of algorithms: log(b)
 	 */
 	public static int GCD(int a, int b)
 	{
