@@ -1,5 +1,6 @@
 package com.maddy.collections.graph;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
@@ -82,4 +83,45 @@ public class AdjListUndirectedGraph extends UndirectedGraph
     {
 
     }
+
+
+    @Override
+    public boolean isCyclic()
+    {
+        boolean[] visited = new boolean[V];
+        for(int i=0; i<V; i++)
+        {
+            if(isCyclicInternal(i,visited,-1))
+                return true;
+        }
+
+        return false;
+    }
+
+    private boolean isCyclicInternal(int v, boolean[] visited, int parent)
+    {
+        if(!visited[v])
+        {
+            visited[v] = true;
+
+            Iterator<AdjNode> iterator = adjList[v].listIterator();
+            while(iterator.hasNext())
+            {
+                AdjNode node = iterator.next();
+                if(!visited[node.vertex])
+                {
+                    if(isCyclicInternal(node.getVertex(), visited, v))
+                        return true;
+                }
+                else if (node.getVertex() != parent)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+
 }

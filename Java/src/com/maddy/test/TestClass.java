@@ -4,6 +4,7 @@ import com.maddy.collections.graph.*;
 import com.maddy.collections.graph.factory.*;
 import com.maddy.collections.tree.BinarySearchTree;
 import com.maddy.collections.tree.BinaryTree;
+import com.maddy.exceptions.TypeValidationException;
 
 /**
  * Created by madhukar.b on 07/08/16.
@@ -13,28 +14,66 @@ public class TestClass
     public static void main(String[] args)
     {
         //BinarySearchTreeTest();
-        GraphTest();
+        //DirecteGraphTest();
+        UndirectedGraphTest();
     }
 
-    private static void GraphTest()
+    private static void DirecteGraphTest()
     {
         AbstractGraphFactory graphFactory =
                 new AdjListDirectedGraphFactory();
 
-        Graph graph = graphFactory.createGraph(5);
-        graph.addEdge(0, 1);
-        graph.addEdge(0, 4);
-        graph.addEdge(1, 2);
-        graph.addEdge(1, 3);
-        graph.addEdge(1, 4);
-        graph.addEdge(2, 3);
-        graph.addEdge(3, 4);
-        graph.addEdge(3, 0);
+        Graph graph = graphFactory.createGraph(6);
+//        graph.addEdge(0, 1);
+//        graph.addEdge(0, 4);
+//        graph.addEdge(1, 2);
+//        graph.addEdge(1, 3);
+//        graph.addEdge(1, 4);
+//        graph.addEdge(2, 3);
+//        graph.addEdge(3, 4);
+//        graph.addEdge(3, 0);
+
+        graph.addEdge(5,0,-1);
+        graph.addEdge(5,2, 3);
+        graph.addEdge(4,1, 4);
+        graph.addEdge(4,0, 5);
+        graph.addEdge(2,3, -2);
+        graph.addEdge(3,1,2);
+        graph.addEdge(1,0,2);
+        graph.addEdge(5,4,10);
 
         // print the adjacency list representation of the above graph
-        graph.printGraph();
-        graph.BSF(0);
-        graph.DSF(3);
+        //graph.printGraph();
+        //graph.BSF(0);
+        //graph.DSF(3);
+        System.out.println(graph.isCyclic());
+        try
+        {
+            int[] result = graph.topologicalSorting();
+            for(int item: result)
+                System.out.print(item + " ");
+
+        } catch (TypeValidationException e)
+        {
+            System.out.println(e.getMessage());
+            //e.printStackTrace();
+        }
+
+        System.out.println();
+
+        try
+        {
+            int[] result = graph.longestDistanceFromSource(5);
+            for(int i=0; i<result.length; i++)
+                System.out.print("["+i+"]="+result[i] + " ");
+
+        } catch (TypeValidationException e)
+        {
+            System.out.println(e.getMessage());
+            //e.printStackTrace();
+        }
+
+        System.out.println();
     }
 
     private static void BinarySearchTreeTest()
@@ -102,5 +141,25 @@ public class TestClass
 
         /*
          */
+    }
+
+
+    private static void UndirectedGraphTest()
+    {
+        AbstractGraphFactory graphFactory =
+                new AdjListUndirectedGraphFactory();
+
+        Graph graph = graphFactory.createGraph(5);
+
+
+        graph.addEdge(0,1);
+        graph.addEdge(1,2);
+        graph.addEdge(0,4);
+        graph.addEdge(4,3);
+
+//        graph.addEdge(0,3);
+
+        System.out.println(graph.isCyclic());
+
     }
 }
