@@ -1,9 +1,11 @@
 package com.maddy.test;
 
+import com.maddy.collections.DisjointUnionSets;
 import com.maddy.collections.graph.*;
 import com.maddy.collections.graph.factory.*;
 import com.maddy.collections.tree.BinarySearchTree;
 import com.maddy.collections.tree.BinaryTree;
+import com.maddy.exceptions.InvalidInputException;
 import com.maddy.exceptions.TypeValidationException;
 
 /**
@@ -11,11 +13,39 @@ import com.maddy.exceptions.TypeValidationException;
  */
 public class TestClass
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws InvalidInputException
     {
         //BinarySearchTreeTest();
         //DirecteGraphTest();
-        UndirectedGraphTest();
+        //UndirectedGraphTest();
+        DisjointSetTest();
+    }
+
+    private static void DisjointSetTest() throws InvalidInputException
+    {
+        DisjointUnionSets ds = new DisjointUnionSets(5);
+        printDisjointSet(ds);
+
+        ds.union(0, 1);
+        printDisjointSet(ds);
+
+        ds.union(4, 3);
+        printDisjointSet(ds);
+
+        ds.union(1, 2);
+        printDisjointSet(ds);
+
+        ds.union(0, 4);
+        printDisjointSet(ds);
+    }
+
+
+    private static void printDisjointSet(DisjointUnionSets ds) throws InvalidInputException
+    {
+        for (int i=0; i<5; i++)
+            System.out.print(ds.find(i) + " ");
+
+        System.out.println();
     }
 
     private static void DirecteGraphTest()
@@ -142,7 +172,6 @@ public class TestClass
         /*
          */
     }
-
 
     private static void UndirectedGraphTest()
     {
