@@ -64,4 +64,10 @@ public class DisjointUnionSets
             rank[repX]++;
         }
     }
+
+    // make p parent of u
+    public void merge(int p, int u)
+    {
+        parent[u] = p;
+    }
 }
