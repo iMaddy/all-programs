@@ -4,10 +4,7 @@ import com.maddy.collections.Node;
 import com.maddy.util.UtilBox;
 import com.maddy.util.WrapInt;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by madhukar.b on 07/08/16.
@@ -17,6 +14,16 @@ class Height
     int height = 0;
 }
 
+class CustomNode
+{
+    Node node;
+    int hd;
+    public CustomNode(Node n, int h)
+    {
+        node = n;
+        hd = h;
+    }
+}
 public class BinarySearchTree
 {
     private Node root;
@@ -174,16 +181,19 @@ public class BinarySearchTree
     public void inOrderTraversal()
     {
         inOrderTraversalInternal(root);
+        System.out.println();
     }
 
     public void preOrderTraversal()
     {
         preOrderTraversalInternal(root);
+        System.out.println();
     }
 
     public void postOrderTraversal()
     {
         postOrderTraversalInternal(root);
+        System.out.println();
     }
 
     public void levelOrderTraversal() 
@@ -450,7 +460,7 @@ public class BinarySearchTree
         if(inStart > inEnd)
             return null;
 
-        Node tNode = new Node((int) postOrder.get(postIndex.getValueAndDecreament()));
+        Node tNode = new Node((int) postOrder.get(postIndex.getValueAndDecrement()));
 
         if(inStart == inEnd)
             return tNode;
@@ -510,5 +520,153 @@ public class BinarySearchTree
 
     }
 
+
+    private void leftViewUtil(Node node, int level, WrapInt max_level)
+    {
+        // Base Case
+        if (node==null) return;
+
+        // If this is the first node of its level
+        if (max_level.getValue() < level)
+        {
+            System.out.print(" " + node.key);
+            max_level.setValue(level);
+        }
+
+        // Recur for left and right subtrees
+        leftViewUtil(node.left, level+1, max_level);
+        leftViewUtil(node.right, level+1, max_level);
+    }
+
+    // A wrapper over leftViewUtil()
+    public void leftView()
+    {
+        leftViewUtil(root, 1, new WrapInt(0));
+        System.out.println();
+    }
+
+    public void rightView()
+    {
+        rightViewUtil(root, 1, new WrapInt(0));
+        System.out.println();
+    }
+
+    private void rightViewUtil(Node node, int level, WrapInt max_level)
+    {
+        // Base Case
+        if (node==null) return;
+
+        // If this is the first node of its level
+        if (max_level.getValue() < level)
+        {
+            System.out.print(" " + node.key);
+            max_level.setValue(level);
+        }
+
+        // Recur for right and left subtrees
+        rightViewUtil(node.right, level+1, max_level);
+        rightViewUtil(node.left, level+1, max_level);
+    }
+
+    public void topView()
+    {
+        if(root == null)
+            return;
+        Map<Integer, Integer> map = new Hashtable<>();
+        Queue<CustomNode> queue = new LinkedList<>();
+        queue.add(new CustomNode(root,0));
+        int minHd =0;
+        int maxHd =0;
+        while (!queue.isEmpty())
+        {
+            CustomNode cNode = queue.poll();
+            Node node = cNode.node;
+            int hd = cNode.hd;
+
+            if(map.get((Integer)hd) == null)
+            {
+                map.put(hd, node.key);
+            }
+
+            if(minHd > hd) minHd = hd;
+            if(maxHd < hd) maxHd = hd;
+
+            if(node.left != null)
+                queue.add(new CustomNode(node.left, hd-1));
+
+            if(node.right != null)
+                queue.add(new CustomNode(node.right, hd+1));
+        }
+
+        for(int i=minHd; i<=maxHd; i++)
+        {
+            System.out.print(map.get(i) + " ");
+        }
+        System.out.println();
+    }
+
+    public void bottomView()
+    {
+        if(root == null)
+            return;
+        Map<Integer, Integer> map = new Hashtable<>();
+        Queue<CustomNode> queue = new LinkedList<>();
+        queue.add(new CustomNode(root,0));
+        int minHd =0;
+        int maxHd =0;
+        while (!queue.isEmpty())
+        {
+            CustomNode cNode = queue.poll();
+            Node node = cNode.node;
+            int hd = cNode.hd;
+
+            map.put(hd, node.key);
+
+            if(minHd > hd) minHd = hd;
+            if(maxHd < hd) maxHd = hd;
+
+            if(node.right != null)
+                queue.add(new CustomNode(node.right, hd+1));
+
+            if(node.left != null)
+                queue.add(new CustomNode(node.left, hd-1));
+        }
+
+        for(int i=minHd; i<=maxHd; i++)
+        {
+            System.out.print(map.get(i) + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args)
+    {
+        BinarySearchTree bTree = new BinarySearchTree();
+        bTree.addNode(20);
+        bTree.addNode(12);
+        bTree.addNode(5);
+        bTree.addNode(9);
+        bTree.addNode(13);
+        bTree.addNode(19);
+        bTree.addNode(1);
+        bTree.addNode(3);
+        bTree.addNode(27);
+        bTree.addNode(23);
+        bTree.addNode(30);
+        bTree.addNode(31);
+        bTree.addNode(21);
+        bTree.addNode(21);
+        bTree.addNode(32);
+        bTree.addNode(33);
+
+        bTree.printTree();
+//        bTree.inOrderTraversal();
+//        bTree.postOrderTraversal();
+////        bTree.leftView();
+//        bTree.rightView();
+
+//        bTree.topView();
+//        bTree.bottomView();
+    }
 }
 

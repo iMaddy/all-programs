@@ -5,7 +5,7 @@ public class LongestIncreasingSubsequence
 	/*
 	 * Algorithm complexity: time O(n^2), space O(n)
 	 */
-	public static int longestIncreasingSubsequence(int []input)
+	public static int longestIncreasingSequence(int []input)
 	{
 		int length = input.length;
 		int array[] = new int[length];
@@ -22,22 +22,19 @@ public class LongestIncreasingSubsequence
 			{
 				if(input[j] < input[i])
 				{
-					if(array[j]+1 > array[i])
-					{
-						array[i] = array[j]+1;
-						actualArray[i] = j;
-					}
+					array[i] = Math.max(array[i], array[j] + 1);
+					actualArray[i] = j;
 				}
 			}
 		}
-		
+
 		int maxIndex = 0;
 		for(int i=0; i<length; i++)
 		{
 			if(array[i] > array[maxIndex])
 				maxIndex = i;
 		}
-		
+
 
         //lets print the actual solution - printed in reverse order
 		LongestIncreasingSubsequence.printLIS(input, actualArray, maxIndex);

@@ -1,15 +1,13 @@
 package com.maddy.algorithms;
 
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
  * Created by gitanjali on 22/02/17.
  */
 public class HuffmanCoding
 {
-    public class MinHeapNode implements Comparable
+    public class MinHeapNode //implements Comparable
     {
         public char data;
         public int frequency;
@@ -22,18 +20,19 @@ public class HuffmanCoding
             left = right = null;
         }
 
-        @Override
-        public int compareTo(Object obj)
-        {
-            return this.frequency - ((MinHeapNode) obj).frequency;
-        }
+//        @Override
+//        public int compareTo(Object obj)
+//        {
+//            return this.frequency - ((MinHeapNode) obj).frequency;
+//        }
     }
 
     PriorityQueue<MinHeapNode> minHeap;
 
     public HuffmanCoding()
     {
-        minHeap = new PriorityQueue<>();
+        Comparator<MinHeapNode> comparator = (MinHeapNode x, MinHeapNode y)-> x.frequency-y.frequency;
+        minHeap = new PriorityQueue<>(comparator);
     }
 
     public void add(char ch, int frequency)
@@ -95,7 +94,5 @@ public class HuffmanCoding
         huffmanCoding.add('f',45);
 
         System.out.println(huffmanCoding.buildHuffmanTree());
-        
-        
     }
 }

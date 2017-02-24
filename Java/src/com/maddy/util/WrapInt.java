@@ -9,12 +9,17 @@ public class WrapInt
         n = num;
     }
 
-    public int get()
+    public int getValue()
     {
         return n;
     }
 
-    public int getValueAndDecreament()
+    public void setValue(int n)
+    {
+        this.n = n;
+    }
+
+    public int getValueAndDecrement()
     {
         int r = n;
         n--;
