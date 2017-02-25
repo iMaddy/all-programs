@@ -1,4 +1,4 @@
-package com.maddy.algorithms;
+package com.maddy.algorithms.dp;
 
 /**
  * Created by gitanjali on 13/02/17.

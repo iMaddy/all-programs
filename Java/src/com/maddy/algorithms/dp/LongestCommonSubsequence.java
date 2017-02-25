@@ -1,4 +1,4 @@
-package com.maddy.algorithms;
+package com.maddy.algorithms.dp;
 
 public class LongestCommonSubsequence
 {

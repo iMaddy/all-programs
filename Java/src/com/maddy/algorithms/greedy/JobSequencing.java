@@ -1,4 +1,4 @@
-package com.maddy.algorithms;
+package com.maddy.algorithms.greedy;
 
 import com.maddy.collections.DisjointUnionSets;
 import com.maddy.exceptions.InvalidInputException;
