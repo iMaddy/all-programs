@@ -4,6 +4,7 @@ import com.maddy.collections.Node;
 import com.maddy.util.UtilBox;
 import com.maddy.util.WrapInt;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -24,7 +25,7 @@ class CustomNode
         hd = h;
     }
 }
-public class BinarySearchTree
+public class BinarySearchTree implements Serializable
 {
     private Node root;
 

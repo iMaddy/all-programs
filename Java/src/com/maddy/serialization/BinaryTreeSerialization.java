@@ -1,4 +1,4 @@
-package com.maddy.test;
+package com.maddy.serialization;
 
 import com.maddy.collections.tree.BinarySearchTree;
 
@@ -7,7 +7,7 @@ import java.io.*;
 /**
  * Created by madhukar.b on 04/09/16.
  */
-public class Test
+public class BinaryTreeSerialization
 {
     public static void main(String[] args) throws IOException, ClassNotFoundException
     {

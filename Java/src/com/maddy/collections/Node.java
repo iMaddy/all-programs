@@ -1,9 +1,11 @@
 package com.maddy.collections;
 
+import java.io.Serializable;
+
 /**
  * Created by madhukar.b on 07/08/16.
  */
-public class Node
+public class Node implements Serializable
 {
     public int key;
     public Node left;
