@@ -48,12 +48,12 @@ public class StringPermutations
 
     public static void main(String[] args)
     {
-//        String str = "ABCD";
+//        String str = "abcabc";
 //        StringPermutations.stringPermutations(str.toCharArray(), 0, str.length() - 1);
 
-        String str1 = "AB";
-        String str2 = "CD";
+        String str1 = "ABC";
+        String str2 = "PQR";
         String result = "";
-        StringPermutations.interLeavingOfStrings(str1, str2, result, 0, 0);
+       // StringPermutations.interLeavingOfStrings(str1, str2, result, 0, 0);
     }
 }
