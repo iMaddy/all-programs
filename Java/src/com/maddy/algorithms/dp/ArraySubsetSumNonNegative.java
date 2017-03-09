@@ -39,7 +39,7 @@ public class ArraySubsetSumNonNegative
             {
                 T[i][j] = T[i-1][j]; // if true if previous subarray contains sum(j)
 
-                if ( j-input[i] >= 0)
+                if ( j>=input[i])
                 {
                     // if subarray contains sum including current element
                     T[i][j] = T[i-1][j] || T[i-1][j-input[i]];

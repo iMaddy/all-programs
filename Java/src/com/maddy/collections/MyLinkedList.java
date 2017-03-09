@@ -1,11 +1,13 @@
 package com.maddy.collections;
 
+import com.sun.org.apache.bcel.internal.generic.LNEG;
+
 /**
  * Created by madhukar.b on 16/10/16.
  */
 public class MyLinkedList
 {
-    private UnidirectionalNode head;
+    private LNode head;
     public MyLinkedList()
     {
         this.head = null;
@@ -19,29 +21,29 @@ public class MyLinkedList
     {
         if(head == null)
         {
-            head = new UnidirectionalNode(data);
+            head = new LNode(data);
             return;
         }
 
-        UnidirectionalNode temp = head;
+        LNode temp = head;
         while(temp.next != null)
         {
             temp = temp.next;
         }
 
-        temp.next = new UnidirectionalNode(data);
+        temp.next = new LNode(data);
     }
 
     public void addAtBeginning(int data)
     {
-        UnidirectionalNode temp = new UnidirectionalNode(data);
+        LNode temp = new LNode(data);
         temp.next = head;
         head = temp;
     }
 
     public void print()
     {
-        UnidirectionalNode temp = head;
+        LNode temp = head;
         while(temp != null)
         {
             System.out.print(temp.data + " ");
@@ -61,7 +63,7 @@ public class MyLinkedList
         return findInternal(head,data,0);
     }
 
-    private int findInternal(UnidirectionalNode head, int data, int index)
+    private int findInternal(LNode head, int data, int index)
     {
         if(head == null)
             return -1;
@@ -73,12 +75,12 @@ public class MyLinkedList
         return findInternal(head.next, data, index);
     }
 
-    public UnidirectionalNode findNode(int data)
+    public LNode findNode(int data)
     {
         return findNodeInternal(head,data,0);
     }
 
-    private UnidirectionalNode findNodeInternal(UnidirectionalNode head, int data, int index)
+    private LNode findNodeInternal(LNode head, int data, int index)
     {
         if(head == null)
             return null;
@@ -99,11 +101,11 @@ public class MyLinkedList
         if(head == null || x==y)
             return;
 
-        UnidirectionalNode prevX = null;
-        UnidirectionalNode _x = null;
-        UnidirectionalNode prevY = null;
-        UnidirectionalNode _y = null;
-        UnidirectionalNode temp = head;
+        LNode prevX = null;
+        LNode _x = null;
+        LNode prevY = null;
+        LNode _y = null;
+        LNode temp = head;
 
         if(head.data == x)
             _x = head;
@@ -154,19 +156,19 @@ public class MyLinkedList
             prevY.next = _x;
         }
 
-        UnidirectionalNode temp1 = _x.next;
+        LNode temp1 = _x.next;
         _x.next = _y.next;
         _y.next = temp1;
     }
 
     public void reverse()
     {
-        UnidirectionalNode current = head;
-        UnidirectionalNode prev = null;
+        LNode current = head;
+        LNode prev = null;
 
         while(current != null)
         {
-            UnidirectionalNode next = current.next;
+            LNode next = current.next;
             current.next = prev;
             prev = current;
             current = next;
@@ -175,9 +177,37 @@ public class MyLinkedList
         head = prev;
     }
 
-    public static UnidirectionalNode mergePoint(MyLinkedList l1, MyLinkedList l2)
+    public void reverseKNode(int k)
     {
-        UnidirectionalNode mergePoint = null, longer = null, shorter = null;
+        head = reverseKNodeUtil(head,k);
+    }
+
+    private LNode reverseKNodeUtil(LNode cHead, int k)
+    {
+        LNode current = cHead;
+        LNode prev = null, next = null;
+
+        int count =0;
+
+        while(count<k && current != null)
+        {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+            count++;
+        }
+
+        if(next != null)
+            cHead.next = reverseKNodeUtil(next, k);
+
+        return prev; //new head
+    }
+
+
+    public static LNode mergePoint(MyLinkedList l1, MyLinkedList l2)
+    {
+        LNode mergePoint = null, longer = null, shorter = null;
         int length1 = l1.size();
         int length2 = l2.size();
 
@@ -219,11 +249,23 @@ public class MyLinkedList
         return sizeInternal(head);
     }
 
-    private int sizeInternal(UnidirectionalNode head)
+    private int sizeInternal(LNode head)
     {
         if(head == null)
             return 0;
 
         return 1 + sizeInternal(head.next);
+    }
+
+    public static void main(String[] args)
+    {
+        MyLinkedList list = new MyLinkedList();
+        list.add(1);list.add(2);list.add(3);
+        list.add(4);list.add(5);list.add(6);
+        list.add(7);list.add(8);list.add(9);
+        list.add(10);list.add(11);list.add(12);
+        list.add(13);list.add(14);list.add(15);
+        list.reverseKNode(3);
+        list.print();
     }
 }

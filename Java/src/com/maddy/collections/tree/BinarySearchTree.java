@@ -273,13 +273,13 @@ public class BinarySearchTree implements Serializable
     	return BinarySearchTree.heightInternal(root);
     }
     
-    private static int heightInternal(Node lRoot)
+    private static int heightInternal(Node root)
     {
-    	if(lRoot == null)
+    	if(root == null)
     		return 0;
     	else
     		return 1 + 
-    				Math.max(BinarySearchTree.heightInternal(lRoot.left), BinarySearchTree.heightInternal(lRoot.right));
+    				Math.max(BinarySearchTree.heightInternal(root.left), BinarySearchTree.heightInternal(root.right));
     }
     
     /* print tree
@@ -461,7 +461,7 @@ public class BinarySearchTree implements Serializable
         if(inStart > inEnd)
             return null;
 
-        Node tNode = new Node((int) postOrder.get(postIndex.getValueAndDecrement()));
+        Node tNode = new Node((int) postOrder.get(postIndex.n--));
 
         if(inStart == inEnd)
             return tNode;
@@ -528,10 +528,10 @@ public class BinarySearchTree implements Serializable
         if (node==null) return;
 
         // If this is the first node of its level
-        if (max_level.getValue() < level)
+        if (max_level.n < level)
         {
             System.out.print(" " + node.key);
-            max_level.setValue(level);
+            max_level.n = level;
         }
 
         // Recur for left and right subtrees
@@ -558,10 +558,10 @@ public class BinarySearchTree implements Serializable
         if (node==null) return;
 
         // If this is the first node of its level
-        if (max_level.getValue() < level)
+        if (max_level.n < level)
         {
             System.out.print(" " + node.key);
-            max_level.setValue(level);
+            max_level.n = level;
         }
 
         // Recur for right and left subtrees
@@ -640,34 +640,96 @@ public class BinarySearchTree implements Serializable
         System.out.println();
     }
 
+    public void kthDistanceFromLeaf(int k)
+    {
+        kthDistanceFromLeafUtil(root,new Height(),k);
+    }
+
+    private void kthDistanceFromLeafUtil(Node root, Height h, int k)
+    {
+        if(root == null)
+        {
+            h.height =0;
+            return;
+        }
+
+        Height lh = new Height();
+        Height rh = new Height();
+
+        kthDistanceFromLeafUtil(root.left, lh, k);
+        kthDistanceFromLeafUtil(root.right, rh, k);
+
+        h.height = 1 + Math.max(lh.height, rh.height);
+
+        if(k == lh.height || k == rh.height)
+        {
+            System.out.print(root.key +" ");
+        }
+    }
+
+    public int distanceBetweenNode(int n1, int n2)
+    {
+        //assumption nodes are present in tree
+        return distanceBetweenNodeUtil(root, n1, n2,0);
+    }
+
+    public int distanceBetweenNodeUtil(Node root, int n1, int n2, int level)
+    {
+        if(root == null)
+            return -1;
+
+        if(root.key == n1 || root.key == n2)
+        {
+            return level;
+        }
+
+        int leftLevel = distanceBetweenNodeUtil(root.left, n1,n2,level+1);
+        int rightLevel = distanceBetweenNodeUtil(root.right, n1,n2,level+1);
+
+        if(leftLevel!=-1 && rightLevel!=-1)
+        {
+            return leftLevel + rightLevel;
+        }
+
+        if(leftLevel != -1)
+            return leftLevel;
+        else
+            return rightLevel;
+    }
+
     public static void main(String[] args)
     {
         BinarySearchTree bTree = new BinarySearchTree();
-        bTree.addNode(20);
-        bTree.addNode(12);
+//        bTree.addNode(20);
+//        bTree.addNode(12);
+//        bTree.addNode(5);
+//        bTree.addNode(9);
+//        bTree.addNode(13);
+//        bTree.addNode(19);
+//        bTree.addNode(1);
+//        bTree.addNode(3);
+//        bTree.addNode(27);
+//        bTree.addNode(23);
+//        bTree.addNode(30);
+//        bTree.addNode(31);
+//        bTree.addNode(21);
+//        bTree.addNode(21);
+//        bTree.addNode(32);
+//        bTree.addNode(33);
+
         bTree.addNode(5);
-        bTree.addNode(9);
-        bTree.addNode(13);
-        bTree.addNode(19);
-        bTree.addNode(1);
         bTree.addNode(3);
-        bTree.addNode(27);
-        bTree.addNode(23);
-        bTree.addNode(30);
-        bTree.addNode(31);
-        bTree.addNode(21);
-        bTree.addNode(21);
-        bTree.addNode(32);
-        bTree.addNode(33);
+        bTree.addNode(2);
+        bTree.addNode(4);
+        bTree.addNode(9);
+        bTree.addNode(10);
+        bTree.addNode(7);
+        bTree.addNode(8);
+
 
         bTree.printTree();
-//        bTree.inOrderTraversal();
-//        bTree.postOrderTraversal();
-////        bTree.leftView();
-//        bTree.rightView();
-
-//        bTree.topView();
-//        bTree.bottomView();
+//        bTree.kthDistanceFromLeaf(2);
+        System.out.println(bTree.distanceBetweenNode(3,21));
     }
 }
 

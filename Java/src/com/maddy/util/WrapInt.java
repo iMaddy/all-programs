@@ -2,7 +2,7 @@ package com.maddy.util;
 
 public class WrapInt
 {
-	private int n;
+	public int n;
 	
 	public WrapInt(int num)
     {

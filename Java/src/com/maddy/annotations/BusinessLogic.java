@@ -5,7 +5,7 @@ public class BusinessLogic {
         super();
     }
     
-    public void compltedMethod() {
+    public void completedMethod() {
         System.out.println("This method is complete");
     }    
     
