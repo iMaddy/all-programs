@@ -3,9 +3,7 @@ package com.maddy.algorithms.graphalgorithm;
 import com.maddy.collections.DisjointUnionSets;
 import com.maddy.exceptions.InvalidInputException;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.*;
 
 /**
  * Created by gitanjali on 21/02/17.
@@ -109,6 +107,7 @@ public class UndirectedGraph
         return result;
 
     }
+
     public static void main(String[] args) throws InvalidInputException
     {
         UndirectedGraph graph = new UndirectedGraph(5);
@@ -130,4 +129,6 @@ public class UndirectedGraph
             System.out.println(mst[i].src + " ---> " + mst[i].dest + " : " + mst[i].weight);
         }
     }
+
+
 }
