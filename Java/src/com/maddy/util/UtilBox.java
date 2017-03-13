@@ -13,11 +13,11 @@ public class UtilBox
      */
     public static int find(ArrayList<Integer> array, int key)
     {
-        if(array != null)
+        if (array != null)
         {
-            for(int i=0; i<array.size(); i++)
+            for (int i = 0; i < array.size(); i++)
             {
-                if(array.get(i) == key)
+                if (array.get(i) == key)
                     return i;
             }
         }
@@ -39,7 +39,7 @@ public class UtilBox
 
         int a[] = new int[list.size()];
 
-        for(int i =0; i<list.size(); i++)
+        for (int i = 0; i < list.size(); i++)
         {
             a[i] = list.get(i);
         }
@@ -49,7 +49,7 @@ public class UtilBox
 
     public static void printArray(int[] array)
     {
-        for(int item: array)
+        for (int item : array)
             System.out.print(item + " ");
 
         System.out.println();
@@ -57,16 +57,32 @@ public class UtilBox
 
     public static int getMax(int[] array)
     {
-        if(array.length < 1)
+        if (array.length < 1)
             return Integer.MAX_VALUE;
 
         int max = array[0];
-        for(int i=1; i<array.length; i++)
+        for (int i = 1; i < array.length; i++)
         {
-            if(array[i] > max)
+            if (array[i] > max)
                 max = array[i];
         }
 
         return max;
+    }
+
+    public static void printMatrix(int[][] matrix)
+    {
+        if (matrix == null)
+            return;
+
+        for (int i = 0; i < matrix.length; i++)
+        {
+            for (int j = 0; j < matrix[0].length; j++)
+            {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
     }
 }
