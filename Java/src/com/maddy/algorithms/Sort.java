@@ -27,18 +27,16 @@ public class Sort
     {
         int pivot = array[end];
         int pivotIndex = beg;
-        int currentIndex = beg;
 
-        while(currentIndex<end)
+        for(int j=0; j<=end; j++)
         {
-            if(array[currentIndex]< pivot)
+            if(array[j]< pivot)
             {
-                int temp = array[currentIndex];
-                array[currentIndex] = array[pivotIndex];
+                int temp = array[j];
+                array[j] = array[pivotIndex];
                 array[pivotIndex]=temp;
                 pivotIndex++;
             }
-            currentIndex++;
         }
         array[end] = array[pivotIndex];
         array[pivotIndex] = pivot;
@@ -49,15 +47,15 @@ public class Sort
     {
         for(int i=0; i<array.length; i++)
         {
-            int element = array[i];
+            int currentElement = array[i];
             int j=i;
 
-            while (j>0 && array[j-1] > element)
+            while (j>0 && array[j-1] > currentElement)
             {
                 array[j] = array[j-1];
                 j--;
             }
-            array[j] = element;
+            array[j] = currentElement;
         }
     }
 

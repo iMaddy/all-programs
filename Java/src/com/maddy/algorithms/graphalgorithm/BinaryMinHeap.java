@@ -135,6 +135,7 @@ public class BinaryMinHeap
     {
         return V<1;
     }
+
     private void swap(int i, int j)
     {
         position.put(heap[i].vertex,j);

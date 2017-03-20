@@ -697,6 +697,30 @@ public class BinarySearchTree implements Serializable
             return rightLevel;
     }
 
+    public int nodesInRange(int min, int max)
+    {
+        return nodesInRange(root,min, max);
+    }
+
+    private int nodesInRange(Node root, int min, int max)
+    {
+        if(min > max)
+            return -1;
+
+        if(root == null)
+            return 0;
+
+        if(max < root.key)
+            return nodesInRange(root.left,min,max);
+        else if(min > root.key)
+            return nodesInRange(root.right, min,max);
+        else
+        {
+            return nodesInRange(root.left,min,root.key) +
+                    nodesInRange(root.right,root.key,max) + 1;
+        }
+    }
+
     public static void main(String[] args)
     {
         BinarySearchTree bTree = new BinarySearchTree();
@@ -729,7 +753,8 @@ public class BinarySearchTree implements Serializable
 
         bTree.printTree();
 //        bTree.kthDistanceFromLeaf(2);
-        System.out.println(bTree.distanceBetweenNode(3,21));
+//        System.out.println(bTree.distanceBetweenNode(3,21));
+        System.out.println(bTree.nodesInRange(0,1));
     }
 }
 
