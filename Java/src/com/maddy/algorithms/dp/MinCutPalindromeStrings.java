@@ -5,7 +5,7 @@ package com.maddy.algorithms.dp;
  */
 public class MinCutPalindromeStrings
 {
-    public static void minCutPalindromeStrings(String str)
+    public static int minCutPalindromeStrings(String str)
     {
         int n = str.length();
         boolean T[][] = new boolean[n][n];
@@ -27,14 +27,24 @@ public class MinCutPalindromeStrings
                     T[i][j] = false;
             }
         }
-        int l = n;
 
-        while(l>0)
+        int[] C = new int[n];
+        for (int i=0; i<n; i++)
         {
-            for(int i=0; i<n-l+1; i++)
+            if (T[0][i] == true)
+                C[i] = 0;
+            else
             {
-                int j=i+l-1;
+                C[i] = Integer.MIN_VALUE;
+                for(int j=0;j<i;j++)
+                {
+                    if(T[j+1][i] == true && 1+C[j]<C[i])
+                        C[i]=1+C[j];
+                }
             }
         }
+
+        // Return the min cut value for complete string. i.e., str[0..n-1]
+        return C[n-1];
     }
 }

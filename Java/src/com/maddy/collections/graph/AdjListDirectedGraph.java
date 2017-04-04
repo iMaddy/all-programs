@@ -1,6 +1,7 @@
 package com.maddy.collections.graph;
 
 import com.maddy.exceptions.TypeValidationException;
+import com.maddy.util.UtilBox;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -275,5 +276,20 @@ public class AdjListDirectedGraph extends DirectedGraph
         }
 
         return dist;
+    }
+
+    public static void main(String[] args) throws TypeValidationException
+    {
+        AdjListDirectedGraph dg = new AdjListDirectedGraph(7);
+        dg.addEdge(1,6);
+        dg.addEdge(0,1);
+        dg.addEdge(0,3);
+        dg.addEdge(4,3);
+        dg.addEdge(4,5);
+        dg.addEdge(5,6);
+
+        UtilBox.printArray(
+         dg.topologicalSorting());
+
     }
 }

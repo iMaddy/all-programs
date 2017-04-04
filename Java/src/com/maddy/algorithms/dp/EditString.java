@@ -13,12 +13,12 @@ public class EditString
             for (int j=0; j<=n; j++)
             {
                 // If first string is empty, only option is to
-                // isnert all characters of second string
+                // insert all characters of second string
                 if (i==0)
                     dp[i][j] = j;  // Min. operations = j
 
                     // If second string is empty, only option is to
-                    // remove all characters of second string
+                    // remove all characters of first
                 else if (j==0)
                     dp[i][j] = i; // Min. operations = i
 

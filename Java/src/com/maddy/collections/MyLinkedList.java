@@ -1,6 +1,6 @@
 package com.maddy.collections;
 
-import com.sun.org.apache.bcel.internal.generic.LNEG;
+import com.maddy.util.WrapInt;
 
 /**
  * Created by madhukar.b on 16/10/16.
@@ -8,6 +8,7 @@ import com.sun.org.apache.bcel.internal.generic.LNEG;
 public class MyLinkedList
 {
     private LNode head;
+
     public MyLinkedList()
     {
         this.head = null;
@@ -15,18 +16,19 @@ public class MyLinkedList
 
     /**
      * Add element to list at the end
+     *
      * @param data element to be inserted
      */
     public void add(int data)
     {
-        if(head == null)
+        if (head == null)
         {
             head = new LNode(data);
             return;
         }
 
         LNode temp = head;
-        while(temp.next != null)
+        while (temp.next != null)
         {
             temp = temp.next;
         }
@@ -44,7 +46,7 @@ public class MyLinkedList
     public void print()
     {
         LNode temp = head;
-        while(temp != null)
+        while (temp != null)
         {
             System.out.print(temp.data + " ");
             temp = temp.next;
@@ -55,21 +57,22 @@ public class MyLinkedList
 
     /**
      * Find element in list
+     *
      * @param data
      * @return index of element in list if element is present else returns -1
      */
     public int find(int data)
     {
-        return findInternal(head,data,0);
+        return findInternal(head, data, 0);
     }
 
     private int findInternal(LNode head, int data, int index)
     {
-        if(head == null)
+        if (head == null)
             return -1;
 
         index++;
-        if(head.data == data)
+        if (head.data == data)
             return index;
 
         return findInternal(head.next, data, index);
@@ -77,15 +80,15 @@ public class MyLinkedList
 
     public LNode findNode(int data)
     {
-        return findNodeInternal(head,data,0);
+        return findNodeInternal(head, data, 0);
     }
 
     private LNode findNodeInternal(LNode head, int data, int index)
     {
-        if(head == null)
+        if (head == null)
             return null;
 
-        if(head.data == data)
+        if (head.data == data)
             return head;
 
         return findNodeInternal(head.next, data, index);
@@ -93,12 +96,13 @@ public class MyLinkedList
 
     /**
      * Function to swap node of linked list
+     *
      * @param x element to be swapped
      * @param y element to be swapped
      */
     public void swap(int x, int y)
     {
-        if(head == null || x==y)
+        if (head == null || x == y)
             return;
 
         LNode prevX = null;
@@ -107,51 +111,48 @@ public class MyLinkedList
         LNode _y = null;
         LNode temp = head;
 
-        if(head.data == x)
+        if (head.data == x)
             _x = head;
 
-        if(head.data == y)
+        if (head.data == y)
             _y = head;
 
-        while(temp.next != null)
+        while (temp.next != null)
         {
-            if(_x == null && temp.next.data == x)
+            if (_x == null && temp.next.data == x)
             {
                 prevX = temp;
                 _x = temp.next;
             }
 
-            if(_y == null && temp.next.data == y)
+            if (_y == null && temp.next.data == y)
             {
                 prevY = temp;
                 _y = temp.next;
             }
 
-            if(_x != null && _y != null)
+            if (_x != null && _y != null)
                 break;
 
             temp = temp.next;
         }
 
 
-
-        if(_x == null || _y == null)
+        if (_x == null || _y == null)
             return;
 
-        if(prevX == null) // x is at head
+        if (prevX == null) // x is at head
         {
             head = _y;
-        }
-        else
+        } else
         {
             prevX.next = _y;
         }
 
-        if(prevY == null) // y is at head
+        if (prevY == null) // y is at head
         {
             head = _x;
-        }
-        else
+        } else
         {
             prevY.next = _x;
         }
@@ -161,12 +162,25 @@ public class MyLinkedList
         _y.next = temp1;
     }
 
+    public void reverseRecursive(LNode node, LNode prev)
+    {
+        if (node == null)
+        {
+            head = prev;
+            return;
+        }
+        LNode next = node.next;
+        node.next = prev;
+        prev = node;
+        reverseRecursive(next, prev);
+    }
+
     public void reverse()
     {
         LNode current = head;
         LNode prev = null;
 
-        while(current != null)
+        while (current != null)
         {
             LNode next = current.next;
             current.next = prev;
@@ -179,7 +193,7 @@ public class MyLinkedList
 
     public void reverseKNode(int k)
     {
-        head = reverseKNodeUtil(head,k);
+        head = reverseKNodeUtil(head, k);
     }
 
     private LNode reverseKNodeUtil(LNode cHead, int k)
@@ -187,9 +201,9 @@ public class MyLinkedList
         LNode current = cHead;
         LNode prev = null, next = null;
 
-        int count =0;
+        int count = 0;
 
-        while(count<k && current != null)
+        while (count < k && current != null)
         {
             next = current.next;
             current.next = prev;
@@ -198,12 +212,11 @@ public class MyLinkedList
             count++;
         }
 
-        if(next != null)
+        if (next != null)
             cHead.next = reverseKNodeUtil(next, k);
 
         return prev; //new head
     }
-
 
     public static LNode mergePoint(MyLinkedList l1, MyLinkedList l2)
     {
@@ -211,27 +224,26 @@ public class MyLinkedList
         int length1 = l1.size();
         int length2 = l2.size();
 
-        if(length1 > length2)
+        if (length1 > length2)
         {
             longer = l1.head;
             shorter = l2.head;
-        }
-        else
+        } else
         {
             longer = l2.head;
             shorter = l1.head;
         }
 
-        int diff = Math.abs(length1-length2);
+        int diff = Math.abs(length1 - length2);
 
-        while(diff-- > 0)
+        while (diff-- > 0)
         {
             longer = longer.next;
         }
 
-        while(longer != null && shorter != null)
+        while (longer != null && shorter != null)
         {
-            if(longer == shorter)
+            if (longer == shorter)
             {
                 mergePoint = longer;
                 break;
@@ -244,6 +256,7 @@ public class MyLinkedList
         return mergePoint;
     }
 
+
     public int size()
     {
         return sizeInternal(head);
@@ -251,21 +264,26 @@ public class MyLinkedList
 
     private int sizeInternal(LNode head)
     {
-        if(head == null)
+        if (head == null)
             return 0;
 
         return 1 + sizeInternal(head.next);
     }
 
+
     public static void main(String[] args)
     {
         MyLinkedList list = new MyLinkedList();
-        list.add(1);list.add(2);list.add(3);
-        list.add(4);list.add(5);list.add(6);
-        list.add(7);list.add(8);list.add(9);
-        list.add(10);list.add(11);list.add(12);
-        list.add(13);list.add(14);list.add(15);
-        list.reverseKNode(3);
+        MyLinkedList list2 = new MyLinkedList();
+        list.add(9);
+        list.add(0);
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list2.add(1);
+        list2.add(1);
+        list2.add(1);
         list.print();
+        list2.print();
     }
 }

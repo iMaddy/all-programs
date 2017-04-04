@@ -721,6 +721,39 @@ public class BinarySearchTree implements Serializable
         }
     }
 
+    /*
+      convert binary tree to doubly linked list
+     */
+    public Node toList()
+    {
+        NodeWrapper head = new NodeWrapper();
+        toListInternal(root, head);
+        return head.node;
+    }
+
+    private void toListInternal(Node root, NodeWrapper head)
+    {
+        if(root == null)
+            return;
+        toListInternal(root.right, head);
+        if(head.node == null)
+        {
+            head.node = root;
+        }
+        else
+        {
+            root.right = head.node;
+            head.node.left = root;
+            head.node = root;
+        }
+        toListInternal(root.left, head);
+
+    }
+
+    class NodeWrapper
+    {
+        Node node;
+    }
     public static void main(String[] args)
     {
         BinarySearchTree bTree = new BinarySearchTree();
@@ -752,9 +785,14 @@ public class BinarySearchTree implements Serializable
 
 
         bTree.printTree();
-//        bTree.kthDistanceFromLeaf(2);
-//        System.out.println(bTree.distanceBetweenNode(3,21));
-        System.out.println(bTree.nodesInRange(0,1));
+
+        Node head = bTree.toList();
+        while(head != null)
+        {
+            System.out.print(head.key + " ");
+            head = head.right;
+        }
+        System.out.println();
     }
 }
 
