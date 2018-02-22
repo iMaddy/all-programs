@@ -4,7 +4,8 @@ from flatten_json import flatten
 import json
 
 def searchDictionaryKey(dict,key):
-    for k in dict:
+    flattenDict = flatten(dict,'#')
+    for k in flattenDict:
             if key in k:
                     print k
 
